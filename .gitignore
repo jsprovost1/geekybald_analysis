@@ -1,0 +1,34 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.env
+.venv/
+venv/
+*.egg-info/
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# Data files (large or sensitive)
+*.csv
+*.parquet
+*.xlsx
+*.json
+!**/config.json
+
+# Output (keep structure, exclude generated files)
+output/*.png
+output/*.pdf
+output/*.html
+
+# Credentials / secrets
+*.env
+secrets.yml
+profiles.yml
