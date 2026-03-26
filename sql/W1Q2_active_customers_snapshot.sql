@@ -56,6 +56,6 @@ SELECT
         THEN f.user_id END)                                                     AS renewed_3m_this_month
 
 FROM reference_months m
-CROSS JOIN mart_subscription_funnel f
+CROSS JOIN ANALYTICS.MARTS.MART_SUBSCRIPTION_FUNNEL f
 GROUP BY m.label, m.month_start
 ORDER BY m.month_start

@@ -14,7 +14,7 @@ def get_connection():
         role=os.getenv("SNOWFLAKE_ROLE"),
         warehouse=os.getenv("SNOWFLAKE_WAREHOUSE"),
         database=os.getenv("SNOWFLAKE_DATABASE"),
-        schema=os.getenv("SNOWFLAKE_SCHEMA"),
+        schema=os.getenv("SNOWFLAKE_SCHEMA"),  # default; queries use fully qualified names
     )
 
 

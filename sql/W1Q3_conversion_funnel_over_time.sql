@@ -20,7 +20,7 @@ WITH monthly_signups AS (
     SELECT
         DATE_TRUNC('month', signup_date)::date AS cohort_month,
         COUNT(DISTINCT user_id)                AS new_signups
-    FROM mart_subscription_funnel
+    FROM ANALYTICS.MARTS.MART_SUBSCRIPTION_FUNNEL
     WHERE signup_date BETWEEN '2019-01-01' AND '2022-12-31'
     GROUP BY 1
 ),
@@ -31,7 +31,7 @@ monthly_trials AS (
         COUNT(DISTINCT user_id)                AS new_trials,
         COUNT(DISTINCT CASE WHEN has_3m_subscription THEN user_id END) AS trials_converted_to_3m,
         COUNT(DISTINCT CASE WHEN has_12m_subscription THEN user_id END) AS trials_converted_to_12m
-    FROM mart_subscription_funnel
+    FROM ANALYTICS.MARTS.MART_SUBSCRIPTION_FUNNEL
     WHERE trial_date BETWEEN '2019-01-01' AND '2022-12-31'
     GROUP BY 1
 ),
@@ -41,7 +41,7 @@ monthly_3m AS (
         DATE_TRUNC('month', subscr_3m_date)::date AS cohort_month,
         COUNT(DISTINCT user_id)                    AS new_3m_subscribers,
         COUNT(DISTINCT CASE WHEN has_12m_subscription THEN user_id END) AS m3_converted_to_12m
-    FROM mart_subscription_funnel
+    FROM ANALYTICS.MARTS.MART_SUBSCRIPTION_FUNNEL
     WHERE subscr_3m_date BETWEEN '2019-01-01' AND '2022-12-31'
     GROUP BY 1
 ),
@@ -50,7 +50,7 @@ monthly_12m AS (
     SELECT
         DATE_TRUNC('month', subscr_12m_date)::date AS cohort_month,
         COUNT(DISTINCT user_id)                     AS new_12m_subscribers
-    FROM mart_subscription_funnel
+    FROM ANALYTICS.MARTS.MART_SUBSCRIPTION_FUNNEL
     WHERE subscr_12m_date BETWEEN '2019-01-01' AND '2022-12-31'
     GROUP BY 1
 )
