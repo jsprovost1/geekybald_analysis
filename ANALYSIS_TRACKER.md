@@ -29,7 +29,7 @@ All queries run against the `ANALYTICS.MARTS` schema in Snowflake:
 | 8 | Marketing 12m initiative — before/after | W4Q2 | Marketing | `[~]` | `W4Q2_marketing_12m_initiative.sql` | `W4Q2_marketing_12m_initiative.ipynb` | SQL + notebook ready — awaiting Snowflake run |
 | 9 | Webpage conversion rate | W4Q4 | Product | `[~]` | `W4Q4_webpage_conversion_rate.sql` | `W4Q4_webpage_conversion_rate.ipynb` | SQL + notebook ready — awaiting Snowflake run |
 | 10 | Login duration: converters vs. non-converters | W5Q3 | Product | `[~]` | `W5Q3_login_duration_converters_vs_not.sql` | `W5Q3_login_duration_converters_vs_not.ipynb` | SQL + notebook ready — awaiting Snowflake run |
-| 11 | Customer service rep ROI | W5Q4 | Leadership | `[!]` | — | — | **BLOCKED** — no CSR data found in any mart or staging table. Needs clarification. |
+| 11 | Customer service rep ROI | W5Q4 | Leadership | `[ ]` | — | — | Critical thinking question — no dataset required. Deliverable is a written analysis framework (Markdown). |
 | 12 | Email performance (onboarding + A/B test) | W6Q1/Q2 | Marketing | `[~]` | `W6Q1Q2_email_campaign_performance.sql` | `W6Q1Q2_email_campaign_performance.ipynb` | SQL + notebook ready — awaiting Snowflake run |
 | 13 | Digital campaign ROI | W6Q3 | Marketing | `[~]` | `W6Q3_digital_campaign_roi.sql` | `W6Q3_digital_campaign_roi.ipynb` | SQL + notebook ready — double-counting risk flagged |
 
