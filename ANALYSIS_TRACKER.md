@@ -19,7 +19,7 @@ All queries run against the `ANALYTICS.MARTS` schema in Snowflake:
 
 | # | Question | Week | Domain | Status | SQL | Notebook | Key Finding |
 |---|----------|------|--------|--------|-----|----------|-------------|
-| 1 | Subscription funnel over time (cohort analysis) | W1Q2/Q3 | Product | `[ ]` | | | |
+| 1 | Subscription funnel over time (cohort analysis) | W1Q2/Q3 | Product | `[~]` | `W1Q2_active_customers_snapshot.sql` · `W1Q3_conversion_funnel_over_time.sql` | `W1Q2_active_customers_snapshot.ipynb` · `W1Q3_conversion_funnel_over_time.ipynb` | SQL done, notebooks running — findings pending. Dec 2022 signup/trial data truncated (DN-001) |
 | 2 | Customer lifetime journey | W2Q1 | Product | `[ ]` | | | |
 | 3 | Time on website before signup | W2Q2 | Product | `[ ]` | | | |
 | 4 | Timing of communications | W3Q3 | Marketing | `[ ]` | | | |
@@ -42,3 +42,10 @@ All queries run against the `ANALYTICS.MARTS` schema in Snowflake:
 - Demographic data limited to `age` only — no gender or socioeconomic status available
 - Subscription status calculations are relative to pipeline run date, not today
 - Two campaign cost tables exist (`stg_campaign_performance` / `stg_campaign_cost`) — verify no double-counting before W6Q3
+
+## Data Notes
+See [`DATA_NOTES.md`](DATA_NOTES.md) for detailed findings. Summary:
+
+| ID | Issue | Affects |
+|----|-------|---------|
+| DN-001 | Signup & trial data truncated after Dec 1, 2022 — one day of data only. Jan–Mar 2023 absent entirely. | W1Q2 · W1Q3 · W1Q4 |

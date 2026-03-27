@@ -1,4 +1,4 @@
--- W1Q3: Subscription conversion funnel over time (Jan 2019 – Dec 2022)
+-- W1Q3: Subscription conversion funnel over time (Jan 2019 – Nov 2022)
 -- Grain: one row per calendar month
 -- Cohort anchor: trial_date (as specified — cohorts defined by when the free trial started)
 --
@@ -12,16 +12,21 @@
 --   new_12m_subscribers  : users whose 12m subscription started in that month
 --   m3_to_12m_rate       : share of 3m subscribers (by 3m start month) who upsold to 12m
 --
+-- DATA NOTE (DN-001): signup_date and trial_date are truncated after Dec 1, 2022.
+--   December 2022 contains one day of signup/trial data only — excluded from those CTEs.
+--   subscr_3m_date and subscr_12m_date run through Dec 30-31 and remain valid.
+--   Jan–Mar 2023 does not exist in any table despite documentation stating otherwise.
+--
 -- Note: conversion rates (trial_to_3m, m3_to_12m) are lagged by nature —
 --       recent cohorts will show lower rates because not enough time has passed.
---       Interpret with caution for months close to Dec 2022.
+--       Interpret with caution for Oct–Nov 2022 cohorts.
 
 WITH monthly_signups AS (
     SELECT
         DATE_TRUNC('month', signup_date)::date AS cohort_month,
         COUNT(DISTINCT user_id)                AS new_signups
     FROM ANALYTICS.MARTS.MART_SUBSCRIPTION_FUNNEL
-    WHERE signup_date BETWEEN '2019-01-01' AND '2022-12-31'
+    WHERE signup_date BETWEEN '2019-01-01' AND '2022-11-30'  -- DN-001: Dec truncated to 1 day
     GROUP BY 1
 ),
 
@@ -32,7 +37,7 @@ monthly_trials AS (
         COUNT(DISTINCT CASE WHEN has_3m_subscription THEN user_id END) AS trials_converted_to_3m,
         COUNT(DISTINCT CASE WHEN has_12m_subscription THEN user_id END) AS trials_converted_to_12m
     FROM ANALYTICS.MARTS.MART_SUBSCRIPTION_FUNNEL
-    WHERE trial_date BETWEEN '2019-01-01' AND '2022-12-31'
+    WHERE trial_date BETWEEN '2019-01-01' AND '2022-11-30'  -- DN-001: Dec truncated to 1 day
     GROUP BY 1
 ),
 

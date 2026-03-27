@@ -21,4 +21,7 @@ def get_connection():
 def query(sql: str) -> pd.DataFrame:
     """Run a SQL query and return a DataFrame."""
     with get_connection() as conn:
-        return pd.read_sql(sql, conn)
+        cursor = conn.cursor()
+        cursor.execute(sql)
+        columns = [col[0].lower() for col in cursor.description]
+        return pd.DataFrame(cursor.fetchall(), columns=columns)
