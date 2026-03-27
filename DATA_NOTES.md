@@ -56,3 +56,28 @@ This is likely a source data issue, not a dbt transformation issue.
 > 3-month and 12-month subscription data for December remains complete and reliable."
 
 ---
+
+## DN-002 — Paid Subscriptions Not Available Before January 2020
+
+**Discovered:** W1Q3 findings review
+**Affects:** W1Q3 · any analysis computing all-time conversion rate baselines
+
+### What we found
+The 3-month ($89.99) and 12-month ($299.99) subscription products were not offered prior to January 2020.
+The 2019 cohorts in `mart_subscription_funnel` contain signups and trials only — all 3m and 12m conversion
+rates for that period are structurally zero, not a reflection of poor product performance.
+
+### Impact per question
+
+**W1Q3 — Conversion Funnel Over Time**
+- The "all-time" medians for `trial_to_3m_rate` and `m3_to_12m_rate` are suppressed by 12 months of structural zeros.
+- All conversion rate baselines and trend analysis should use **January 2020 onward** as the starting point.
+- Volume charts for signups/trials can still show 2019 as context, but paid funnel stages should be anchored to 2020.
+- **Action:** Findings cell updated to flag this; all-time medians noted as distorted.
+
+### What to tell stakeholders
+> "The paid subscription products (3-month and 12-month) launched in January 2020.
+> Any conversion rate metrics that include 2019 data will appear artificially low — 2019 cohorts
+> had no paid product to convert into. All baseline calculations should be anchored to January 2020."
+
+---
